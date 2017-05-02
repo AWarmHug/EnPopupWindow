@@ -1,7 +1,7 @@
 # EnPopupWindow
 处理popupwindow的相关问题,主要处理背景浮层问题.
 
-在popup显示的时候,在寻找根据传入的view寻找到最外层的ViewGroup,在ViewGroup中添加一个黑色View,然后启动一个属性动画修改背景色.\n
+在popup显示的时候,在寻找根据传入的view寻找到最外层的ViewGroup,在ViewGroup中添加一个黑色View,然后启动一个属性动画修改背景色.
 
 为什么不使用属性动画修改Window的亮度?
 在使用这种方法的时候,当返回上一个Activity时,屏幕会变黑,影响很不好,此外在很多机型上存在问题,尤其华为的一些机子上,屏幕亮度调节时有明显卡顿的感觉,体验非常不好.
