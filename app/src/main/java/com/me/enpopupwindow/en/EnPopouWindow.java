@@ -60,6 +60,7 @@ public class EnPopouWindow extends PopupWindow {
         set(contentView.getContext());
     }
 
+
     @Override
     public void showAtLocation(View parent, int gravity, int x, int y) {
         super.showAtLocation(parent, gravity, x, y);
@@ -69,12 +70,30 @@ public class EnPopouWindow extends PopupWindow {
         anim(0f, 0.5f, 300);
     }
 
+    /**
+     *
+     * @param anchor
+     * @param viewGroup 需要变暗的ViewGroup,如果传null,就代表全屏变暗
+     * @param xoff
+     * @param yoff
+     * @param gravity
+     */
+    public void showAsDropDown(View anchor, ViewGroup viewGroup,  int xoff, int yoff, int gravity) {
+        this.showAsDropDown(anchor, xoff, yoff, gravity);
+        if (viewGroup==null) {
+            vOut = findSuitableParent(anchor);
+        } else {
+            vOut = viewGroup;
+        }
+        vOut.addView(v);
+        anim(0f, 0.5f, 300);
+    }
+
+
     @Override
     public void showAsDropDown(View anchor, int xoff, int yoff, int gravity) {
         super.showAsDropDown(anchor, xoff, yoff, gravity);
-        anim(0f, 0.5f, 300);
-        vOut = findSuitableParent(anchor);
-        vOut.addView(v);
+
     }
 
     @Override
@@ -107,14 +126,17 @@ public class EnPopouWindow extends PopupWindow {
         animator.start();
     }
 
+    public interface OnViewClick {
+        void viewClick(View v);
+    }
+
+    public interface OnClickSure {
+
+        void click(View view, int position);
+
+    }
 
 
-
-    /**
-     * copy from SnackBar 源码
-     * @param view
-     * @return
-     */
     private ViewGroup findSuitableParent(View view) {
         ViewGroup fallback = null;
         do {
